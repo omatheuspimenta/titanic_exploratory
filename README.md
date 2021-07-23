@@ -11,6 +11,10 @@
 * [Exibição](preprocess.md)
 * [code - R](preprocess.R)
 
-## Testes de Hipótese e Regressão
-* [Exibição](ht_regression.md)
-* [code - R](ht_regression.R)
+## Análises e Testes de Hipótese
+* [Exibição](ht.md)
+* [code - R](ht.R)
+
+## Regressão
+* [Exibição](regression.md)
+* [code - R](regression.R)
