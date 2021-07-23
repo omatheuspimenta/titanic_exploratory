@@ -1,6 +1,6 @@
 # [Análise Exploratória](github.com/omatheuspimenta/titanic_exploratory)
 ## Bioestatística - 2021
-[Matheus Pimenta](omatheuspimenta.github.io)
+[Matheus Pimenta](https://github.com/omatheuspimenta)
 
 ---
 ## Dataset

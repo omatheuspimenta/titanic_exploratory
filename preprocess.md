@@ -1,7 +1,7 @@
 # [Análise Exploratória](github.com/omatheuspimenta/titanic_exploratory)
 ### Pré-processamento
 ## Bioestatística - 2021
-[Matheus Pimenta](omatheuspimenta.github.io)
+[Matheus Pimenta](https://github.com/omatheuspimenta)
 ### Dataset: [titanic3.sav](dataset/titanic3.sav)
 ###### [detalhes sobre a geração dos dados](https://hbiostat.org/data/repo/titanic.html)
 ---
@@ -32,8 +32,8 @@ As colunas do dataset [titanic3](https://hbiostat.org/data/repo/titanic.html) re
 * **name**: Nome do passageiro.  
 * **sex**: Sexo do passageiro, masculino ou feminino.  
 * **age**: Idade do passageiro.  
-* **sibsp**: Número de irmãos / cônjuges a bordo.  
-* **parch**: Número de pais / filhos a bordo.  
+* **sibsp**: Número de irmãos/cônjuges a bordo.  
+* **parch**: Número de pais/filhos a bordo.  
 * **ticket**: Código da passagem.  
 * **fare**: Valor da passagem.  
 * **cabin**: Identificação da cabine.  
@@ -59,35 +59,35 @@ Após analisar a descrição das variáveis do dataset é possível verificar qu
 * **survived** (binária): Informa se o passageiro sobreviveu (1) ou não (0). Ao todo, neste dataset, 500 passageiros sobreviveram.
 * **name** (string): Nome do passageiro, sendo 1307 nomes distintos.  
 * **sex** (string/fator): Sexo do passageiro, masculino ou feminino. São 466 pessoas do sexo feminino e 843 pessoas do sexo masculino.  
-* **age** (double): Idade do passageiro. Temos 263 dados faltantes que iremos tratar ao decorrer dessa análise, os outros dados refere-se a 1046 observações com um valor mínimo de 0.1667 e um valor máximo de 80 anos.  
-* **sibsp** (inteiro): Número de irmãos / cônjuges a bordo. O valor máximo para essa variável é de 8 familiares, sendo distribuídos da seguinte maneira:  
+* **age** (double): Idade do passageiro. Temos 263 dados faltantes que iremos tratar ao decorrer dessa análise, os outros dados referem-se a 1046 observações com um valor mínimo de 0.1667 e um valor máximo de 80 anos.  
+* **sibsp** (inteiro): Número de irmãos/cônjuges a bordo. O valor máximo para essa variável é de 8 familiares, sendo distribuídos da seguinte maneira:  
 
 |Valor|          0|    1|     2|     3|     4|     5|     8|  
 |:---|:---------:|:---:|:----:|:----:|:----:|:----:|:----:|    
 |Frequência|    891|   319|    42|    20|    22|     6|     9|
 
-* **parch** (inteiro): Número de pais / filhos a bordo. A seguinte distribuição é apresentada:  
+* **parch** (inteiro): Número de pais/filhos a bordo. A seguinte distribuição é apresentada:  
 
 |Valor|          0|     1|     2|     3|     4|     5|     6|     9|
 |:---|:---------:|:---:|:----:|:----:|:----:|:----:|:----:|:----| 
 |Frequência|   1002|   170|   113|     8|     6|     6|     2|     2|
 
 * **ticket** (string): Código da passagem, ao todo são 929 passagens diferentes. 
-* **fare** (double): Valor da passagem, há uma observação faltante. O valor da passagem necessita de algumas análises particulares devido a existência de outliers, já que a média dos valores foi de 33.3 e a mediana é de apenas 14.4, ao observar os extremos dos valores é possível verificar a existência de algumas observações nulas, isto é, não ocorreu o pagamento de nenhum valor pela passagem e no outro extremo há a existência de um valor de 512.32. Ao decorrer da análise serão detalhados esses valores e se necessário, corrigidos.
+* **fare** (double): Valor da passagem, há uma observação faltante. O valor da passagem necessita de algumas análises particulares devido a existência de outliers, já que a média dos valores foi de 33.3 e a mediana é de apenas 14.4, ao observar os extremos dos valores é possível verificar a existência de algumas observações nulas, isto é, não ocorreu o pagamento de nenhum valor pela passagem e no outro extremo há a existência de um valor de 512.32. Ao decorrer da análise serão detalhados esses valores e, se necessário, corrigidos.
 * **cabin** (fator): Identificação da cabine, totalizando 187 cabines distintas. 
 * **embarked** (fator): Local de embarque, há dois valores faltantes nesta coluna, o restante é distribuído da seguinte maneira:
 
 |Local|        Cherbourg|  Queenstown| Southampton|
 |:----|:--------------:|:----------:|:---------|
 |Frequência|          270|         123|         914|
-* **boat** (fator): São apresentados 28 identificações de botes distintas. 
+* **boat** (fator): São apresentadas 28 identificações de botes distintas. 
 * **body** (inteiro): Identificação do Corpo. Esta variável apresenta 1188 observações ausentes.
 * **home.dest** (string): Destino ou Partida, há 564 observações faltantes nesta coluna.
 ---
 ## Analisando cada coluna em busca de informações
 
 ### Coluna _pclass_
-A coluna _pclass_ não possui nenhuma observação faltante e seus dados são categoricos. Dessa forma esta apta ao uso sem maiores manipulações.
+A coluna _pclass_ não possui nenhuma observação faltante e seus dados são categóricos. Dessa forma, está apta ao uso sem maiores manipulações.
 
 **Dica:** Transformar em variável _dummy_ ao final da análise exploratória.
 
@@ -114,15 +114,15 @@ A distribuição dos títulos e sobrenomes através de um gráfico de barras rep
 [Figure - barplot_title.pdf](figures/barplot_title.pdf)  
 [Figure - barplot_lastname.pdf](figures/barplot_lastname.pdf)
 
-Observando os valores obtidos nas 20 observações de maior frequência é possível verificar que existe muito "ruído" no nome de tratamento adotado, caso seja o objetivo utilizar essa variável em uma regressão uma solução é a inclusão de valores com baixa frequência em um novo grupo para evitar ruídos nas predições. Essa abordagem pode ser considerada já que são nomes de tratamento como "Capt", "Major" e afins com baixíssimas observações.
+Analisando os valores obtidos nas 20 observações de maior frequência é possível verificar que existe muito "ruído" no nome de tratamento adotado. Caso seja o objetivo utilizar essa variável em uma regressão, uma solução é a inclusão de valores com baixa frequência em um novo grupo para evitar ruídos nas predições. Essa abordagem pode ser considerada já que são nomes de tratamento como "Capt", "Major" e afins com baixíssimas observações.
 
-Já sobre as 20 observações de maior frequência em relação aos sobrenomes é possível verificar que algumas famílias eram compostas por diversos membros a bordo. Ao decorrer das análises poderemos verificar se há uma ligação entre estes valores, classes e sobreviventes.
+Já sobre as 20 observações de maior frequência, em relação aos sobrenomes, é possível verificar que algumas famílias eram compostas por diversos membros a bordo. Ao decorrer das análises poderemos verificar se há uma ligação entre estes valores, classes e sobreviventes.
 
 **Dica:** Unir valores de baixa frequência da nova coluna _title_ e verificar as correlações entre as maiores famílias a bordo presentes na nova coluna _lastname_.
 
 ## Coluna _sex_
 
-A coluna _sex_ não possui nenhuma observação faltante e seus dados são categoricos. Dessa forma esta apta ao uso sem maiores manipulações.
+A coluna _sex_ não possui nenhuma observação faltante e seus dados são categóricos. Dessa forma está apta ao uso sem maiores manipulações.
 
 **Dica:** Transformar em variável _dummy_ ao final da análise exploratória.
 
@@ -130,11 +130,11 @@ A coluna _sex_ não possui nenhuma observação faltante e seus dados são categ
 
 A coluna _age_ apresenta diversas observações faltantes e dessa forma necessita uma análise para a imputação dos valores faltantes de maneira menos enviesada.
 
-Inicialmente verificamos algumas medidas de posição e graficamente analisamos a distribuição dos dados.
+Inicialmente, verificamos algumas medidas de posição e graficamente analisamos a distribuição dos dados.
 ```r
 range(titanic3$age, na.rm = TRUE)
 ```
-Considerando apenas as amostras existentes, é possível confirmar os extremos dos dados, inicialmente não iremos considerá-los como _outliers_, pois mesmo com uma baixa probabilidade ainda era possível pessoas terem idades próximas a 80 anos.
+Considerando apenas as amostras existentes, é possível confirmar os extremos dos dados. Inicialmente não iremos considerá-los como _outliers_, pois mesmo com uma baixa probabilidade, ainda era possível que mais  pessoas tivessem idade próxima a 80 anos.
 
 O [boxplot](figures/boxplot_age.pdf), [histograma](hist_age.pdf) e [qqplot](figures/qqplot_age.pdf) da coluna _sex_ são considerados também.
 ```r
@@ -169,15 +169,15 @@ qqline(as.numeric(age),
        col="red")
 ```
 
-Visualmente há evidências que a coluna _age_ segue uma distribuição próxima a Normal, ~~para obtermos a confirmação ou não, realizamos o teste de normalidade de [Shapiro-Wilk](https://doi.org/10.1093/biomet/52.3-4.591)~~.
+Visualmente há evidências de que a coluna _age_ segue uma distribuição próxima a Normal, ~~para obtermos a confirmação ou não, realizamos o teste de normalidade de [Shapiro-Wilk](https://doi.org/10.1093/biomet/52.3-4.591)~~.
 ```r
 shapiro.test(age)
 ```
 ~~Através do teste de normalidade de Shapiro-Wilk não assumimos a normalidade dos dados e~~  dessa forma a inclusão de novas informações ao dataset será realizada via _Imputação Múltipla_ utilizando a estratégia _bootstrap_.
 
-_Não foi considerado o teste de normalidade de Shapiro-Wilk devido o baixo poder de teste apresentado por este teste. Está em desuso._ 
+_Não foi considerado o teste de normalidade de Shapiro-Wilk devido ao baixo poder de teste apresentado por este teste. Está em desuso._ 
 
-Optamos por selecionar apenas um conjunto de dados para a distribuição dos dados, neste caso foi selecionado a coluna _pclass_. Para cada conjunto _pclass_ são consideradas **R** reamostragens _bootstrap_ e selecionada a média entre esses conjuntos e substituida a observação faltante.
+Optamos por selecionar apenas uma coluna do dataset, neste caso foi selecionado a coluna _pclass_. Para cada conjunto _pclass_ são consideradas **R** reamostragens _bootstrap_ e selecionada a média entre esses conjuntos e substituída a observação faltante.
 
 Novos [boxplot](figures/boxplot_age2.pdf), [histograma](hist_age2.pdf) e [qqplot](figures/qqplot_age2.pdf) da coluna _age_.
 
@@ -195,11 +195,11 @@ A coluna _parch_ não possui observação faltante. Não trabalharemos com ela n
 
 ## Coluna _ticket_
 
-A coluna _ticket_ possui dados mistos, isto é, inteiros e strings. Todas as observações possuem inteiros, dessa forma podemos tentar buscar alguma relação entre os valores e as outras variáveis, contudo até o momento não utilizaremos, caso seja necessário voltaremos para extrair novas informações.
+A coluna _ticket_ possui dados mistos, isto é, números inteiros e strings. Todas as observações possuem inteiros, dessa forma podemos tentar buscar alguma relação entre os valores e as outras variáveis, contudo até o momento não a utilizaremos, caso seja necessário voltaremos para extrair novas informações.
 
 ## Coluna _fare_
 
-A coluna _fare_ possui uma única observação faltante, iremos utilizar a mesma abordagem utilizada para a inclusão de valores na coluna _age_ para a inclusão deste valor e depois trataremos os valores outliers, se necessário.
+A coluna _fare_ possui uma única observação faltante, iremos utilizar a mesma abordagem usada para a inclusão de valores na coluna _age_ para a inserção deste valor e depois trataremos os valores outliers, se necessário.
 
 ```r
 titanic3[which(is.na(titanic3$fare)),]
@@ -209,15 +209,15 @@ Iremos substituir através da média resultante da abordagem _bootstrap_.
 
 Analisando os [boxplot](figures/boxplot_fare1.pdf), [histograma](hist_fare1.pdf) e [qqplot](figures/qqplot_fare1.pdf) da coluna _fare_, é possível afirmar que há _outliers_ e que essa coluna não segue distribuição Normal. 
 
-Sobre os valores _outliers_ da coluna _fare_ podemos verificar que são valores iguais a zero e o valor extremo maior que 500. Estes valores serão considerados em uma outra análise.
+Sobre os valores _outliers_ da coluna _fare_ podemos averiguar que são valores iguais a zero e o valor extremo maior que 500. Estes valores serão considerados em uma outra análise.
 
 ## Coluna _cabin_
 
-A coluna _cabin_ possui alguns valores faltantes, contudo não é possível a imputação dos valores faltantes neste momento. Uma alternativa seria associar famílias com a cabine, contudo essa associação não é possível por ausência de informações no dataset.
+A coluna _cabin_ possui alguns valores faltantes, contudo não é possível a imputação dos valores faltantes neste momento. Uma alternativa seria associar famílias com a cabine, no entanto essa associação não é possível por ausência de informações no dataset.
 
 ## Coluna _embarked_
 
-A coluna _embarked_ possui 2 observações faltantes. Iremos preencher baseado na frequência de embarque por classe.
+A coluna _embarked_ possui 2 observações faltantes. Iremos preenche-la baseado na frequência de embarque por classe.
 ```r
 i_n<-which(is.na(titanic3$embarked))
 titanic3[which(is.na(titanic3$embarked)),]
@@ -236,7 +236,7 @@ remove(i_n,t,c,x,i)
 
 ## Coluna _boat_
 
-A coluna _boat_ possui observações faltantes, contudo não é possível realizar a imputação dos dados faltantes neste momento.
+A coluna _boat_ possui observações faltantes, entretanto não é possível realizar a imputação destes dados neste momento.
 
 ## Coluna _body_
 
@@ -244,11 +244,11 @@ A coluna _body_ possui diversas observações faltantes que não são possíveis
 
 ## Coluna _home.dest_
 
-A coluna _home.dest_ possui alguns valores faltantes, contudo não é possível a imputação dos valores faltantes neste momento. Uma alternativa seria associar famílias com a observação, contudo essa associação não é possível por ausência de informações no dataset no momento.
+A coluna _home.dest_ possui alguns valores faltantes, contudo não é possível a imputação dos valores faltantes neste momento. Uma alternativa seria associar famílias com a observação, no entanto essa associação não é possível por ausência de informações no dataset no momento.
 
 ## Inclusão de novas colunas: _mother_ e _nfamily_
 
-Nova colunas podem ser incluídas ao analisar os dados. Podemos inferir se há mães ou não a bordo, já que temos informações de filhos e parentes a bordo e também verificar o tamanho da família a bordo.
+Novas colunas podem ser incluídas ao analisar os dados. Podemos inferir se há mães ou não a bordo, visto que há informações de filhos e parentes emabarcados, e também verificar o tamanho da família a bordo.
 
 ```r
 titanic3$nfamily <- titanic3$sibsp + titanic3$parch + 1
@@ -291,6 +291,12 @@ titanic3$parch9 <- ifelse(titanic3$parch==9,1,0)
 titanic3$Cherbourg <- ifelse(titanic3$embarked == "Cherbourg",1,0)
 titanic3$Queenstown <- ifelse(titanic3$embarked == "Queenstown",1,0)
 titanic3$Southampton <- ifelse(titanic3$embarked == "Southampton",1,0)
+# age dummy
+titanic3$children <- ifelse(titanic3$age<=11, 1, 0)
+titanic3$teenage <- ifelse((titanic3$age>11 & titanic3$age<20), 1, 0)
+titanic3$young <- ifelse((titanic3$age>20 & titanic3$age<30), 1, 0)
+titanic3$adult <- ifelse((titanic3$age>30 & titanic3$age<60), 1, 0)
+titanic3$old <- ifelse(titanic3$age>60, 1, 0)
 # nfamily dummy
 titanic3$nfamily1 <- ifelse(titanic3$nfamily == 1,1,0)
 titanic3$nfamily2 <- ifelse(titanic3$nfamily == 2,1,0)

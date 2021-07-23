@@ -570,7 +570,8 @@ describe(titanic3)
 # 1309        0        2    0.239      114  0.08709   0.1591 
 # 
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------                                                                                                                             -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Creating dummy variables for "pclass", "sex", "sibsp", "parch", "embarked" and, "nfamily"
+# Creating dummy variables for "pclass", "sex", "sibsp", "parch", "embarked", "age"
+# and, "nfamily"
 # using the base R
 # pclass dummy
 titanic3$pclass1st <- ifelse(titanic3$pclass=="1st",1,0)
@@ -600,6 +601,12 @@ titanic3$parch9 <- ifelse(titanic3$parch==9,1,0)
 titanic3$Cherbourg <- ifelse(titanic3$embarked == "Cherbourg",1,0)
 titanic3$Queenstown <- ifelse(titanic3$embarked == "Queenstown",1,0)
 titanic3$Southampton <- ifelse(titanic3$embarked == "Southampton",1,0)
+# age dummy
+titanic3$children <- ifelse(titanic3$age<=11, 1, 0)
+titanic3$teenage <- ifelse((titanic3$age>11 & titanic3$age<20), 1, 0)
+titanic3$young <- ifelse((titanic3$age>20 & titanic3$age<30), 1, 0)
+titanic3$adult <- ifelse((titanic3$age>30 & titanic3$age<60), 1, 0)
+titanic3$old <- ifelse(titanic3$age>60, 1, 0)
 # nfamily dummy
 titanic3$nfamily1 <- ifelse(titanic3$nfamily == 1,1,0)
 titanic3$nfamily2 <- ifelse(titanic3$nfamily == 2,1,0)
