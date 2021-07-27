@@ -3,11 +3,9 @@
 ## @ Matheus Pimenta
 ## github.com/omatheuspimenta/titanic_exploratory
 ###########################################################
-
 #####
 # Set path
 setwd("/home/matheus/Dropbox/06_doutorado/2021_01/Bioestatistica/projeto/dataset/")
-
 #####
 # Libraries
 library("Hmisc") #for describe
@@ -19,7 +17,6 @@ library("boot") #for bootstrap
 #####
 # Load file
 load("titanic3.sav")
-
 #####
 # Sumary
 head(titanic3)
@@ -41,17 +38,14 @@ summary(titanic3)
 #  3rd Qu.: 31.275   B96 B98        :   4                     14     : 33   3rd Qu.:256.0                     
 #  Max.   :512.329   C22 C26        :   4                     4      : 31   Max.   :328.0                     
 #  NA's   :1         (Other)        : 271                     (Other):308   NA's   :1188         
-
 dim(titanic3)
 # 1309   14
-
 #####
 # Identifying the types of the variables
 print("Classes (class):")
 print(sapply(titanic3, class))
 print("Classes (typeof):")
 print(sapply(titanic3, typeof))
-
 # "Classes (class):"
 # pclass   survived       name        sex        age      sibsp      parch     ticket       fare      cabin   embarked       boat       body  home.dest 
 # "factor" "labelled" "labelled"   "factor" "labelled" "labelled" "labelled" "labelled" "labelled"   "factor"   "factor"   "factor" "labelled" "labelled" 
@@ -60,11 +54,9 @@ print(sapply(titanic3, typeof))
 # "integer"   "integer" "character"   "integer"    "double"   "integer"   "integer" "character"    "double"   "integer"   "integer"   "integer"   "integer" 
 # home.dest 
 # "character" 
-
 #####
 # Describe dataset
 describe(titanic3)
-
 # titanic3 
 # 14  Variables      1309  Observations
 # --------------------------------------------------------------------------------------------------------
@@ -78,19 +70,16 @@ describe(titanic3)
 #   survived : Survived 
 #    n  missing distinct     Info      Sum     Mean      Gmd 
 # 1309        0        2    0.708      500    0.382   0.4725 
-# 
 # --------------------------------------------------------------------------------------------------------
 #   name : Name 
 #    n  missing distinct 
 # 1309        0     1307 
-# 
 # lowest : Abbing, Mr. Anthony             Abbott, Master. Eugene Joseph   Abbott, Mr. Rossmore Edward     Abbott, Mrs. Stanton (Rosa Hunt Abelseth, Miss. Karen Marie    
 # highest: Zabour, Miss. Hileni            Zabour, Miss. Thamine           Zakarian, Mr. Mapriededer       Zakarian, Mr. Ortin             Zimmerman, Mr. Leo
 # --------------------------------------------------------------------------------------------------------
 #   sex 
 #    n  missing distinct 
 # 1309        0        2 
-# 
 # Value      female   male
 # Frequency     466    843
 # Proportion  0.356  0.644
@@ -100,15 +89,12 @@ describe(titanic3)
 # 1046      263       98    0.999    29.88    16.06        5       14       21       28       39 
 # .90      .95 
 #  50       57 
-# 
 # lowest :  0.1667  0.3333  0.4167  0.6667  0.7500, highest: 70.5000 71.0000 74.0000 76.0000 80.0000
 # --------------------------------------------------------------------------------------------------------
 #   sibsp : Number of Siblings/Spouses Aboard 
 #    n  missing distinct     Info     Mean      Gmd 
 # 1309        0        7     0.67   0.4989    0.777 
-# 
 # lowest : 0 1 2 3 4, highest: 2 3 4 5 8
-# 
 # Value          0     1     2     3     4     5     8
 # Frequency    891   319    42    20    22     6     9
 # Proportion 0.681 0.244 0.032 0.015 0.017 0.005 0.007
@@ -116,9 +102,7 @@ describe(titanic3)
 #   parch : Number of Parents/Children Aboard 
 #    n  missing distinct     Info     Mean      Gmd 
 # 1309        0        8    0.549    0.385   0.6375 
-# 
 # lowest : 0 1 2 3 4, highest: 3 4 5 6 9
-# 
 # Value          0     1     2     3     4     5     6     9
 # Frequency   1002   170   113     8     6     6     2     2
 # Proportion 0.765 0.130 0.086 0.006 0.005 0.005 0.002 0.002
@@ -126,7 +110,6 @@ describe(titanic3)
 #   ticket : Ticket Number 
 #    n  missing distinct 
 # 1309        0      929 
-# 
 # lowest : 110152      110413      110465      110469      110489     
 # highest: W./C. 6608  W./C. 6609  W.E.P. 5734 W/C 14208   WE/P 5735  
 # --------------------------------------------------------------------------------------------------------
@@ -135,19 +118,16 @@ describe(titanic3)
 # 1308        1      281        1     33.3    38.61    7.225    7.567    7.896   14.454   31.275 
 #    .90      .95 
 # 78.051  133.650 
-# 
 # lowest :   0.0000   3.1708   4.0125   5.0000   6.2375, highest: 227.5250 247.5208 262.3750 263.0000 512.3292
 # --------------------------------------------------------------------------------------------------------
 #   cabin 
 #    n  missing distinct 
 # 1309        0      187 
-# 
 # lowest :     A10 A11 A14 A16, highest: F33 F38 F4  G6  T  
 # --------------------------------------------------------------------------------------------------------
 #   embarked 
 #    n  missing distinct 
 # 1307        2        3 
-# 
 # Value        Cherbourg  Queenstown Southampton
 # Frequency          270         123         914
 # Proportion       0.207       0.094       0.699
@@ -155,7 +135,6 @@ describe(titanic3)
 #   boat 
 #    n  missing distinct 
 # 1309        0       28 
-# 
 # lowest :     1   10  11  12 , highest: A   B   C   C D D  
 # --------------------------------------------------------------------------------------------------------
 #   body : Body Identification Number 
@@ -163,12 +142,10 @@ describe(titanic3)
 # 121     1188      121        1    160.8      113       16       35       72      155      256 
 # .90      .95 
 # 297      307 
-# 
 # lowest :   1   4   7   9  14, highest: 312 314 322 327 328
 # home.dest : Home/Destination 
 #   n  missing distinct 
 # 745      564      368 
-# 
 # lowest : ?Havana, Cuba                   Aberdeen / Portland, OR         Albany, NY                      Altdorf, Switzerland            Amenia, ND                     
 # highest: Worcester, England              Worcester, MA                   Yoevil, England / Cottage Grove Youngstown, OH                  Zurich, Switzerland            
 # --------------------------------------------------------------------------------------------------------
@@ -178,10 +155,8 @@ describe(titanic3)
 # In the column "name" we can extract the "Mr", "Mrs",... of the observation
 # and copy to a new column "title"
 titanic3$title <- str_split_fixed(titanic3$name, " ",3)[,2]
-
 # Extracting the last name for other analysis
 titanic3$lastname <- str_split_fixed(titanic3$name, " ",3)[,1]
-
 # Plot barplot of frequency - title
 # temp variable for barplot - title
 t<-count(titanic3, 'title')
@@ -211,7 +186,6 @@ text(x = xx, y = t$freq[1:20], label = t$freq[1:20], pos = 3, cex = 0.8, col = "
 axis(1, at=xx, labels=t$lastname[1:20], tick=FALSE, las=2, line=-0.5, cex.axis=0.8)
 # remove temp variables
 remove(t,xx,ylim)
-
 # The column "sex" does not have any "new" information until here.
 # The column "age" have some NA values, in this case, we will replace these values
 # in order to obtain an approximation and use this column in our analysis
@@ -348,7 +322,6 @@ qqline(as.numeric(age),
        col="red")
 # remove temp variables
 remove(age, fteoricoN_age, mean_age, sd_age)
-
 # The columns "sibsp", "parch" and "ticket" do not have any "new"
 # information until here.
 # The column "fare" has one NA value, let's see this.
@@ -412,7 +385,6 @@ remove(fare, fteoricoN_fare, fteoricoE_fare, mean_fare, sd_fare)
 tapply(titanic3$fare,titanic3$pclass, mean)
 #     1st      2nd      3rd 
 #87.50899 21.17920 13.30289 
-
 # In the column "cabin" we can't impute the NA information yet. 
 # One way to do this is to associate the last name with the cabin, 
 # but that information isn't available.
@@ -439,15 +411,12 @@ titanic3$nfamily <- titanic3$sibsp + titanic3$parch + 1
 titanic3$mom <- ifelse((titanic3$sex=="female" & titanic3$parch>=1 & titanic3$age > 18), 1, 0)
 #####
 describe(titanic3)
-
 # titanic3 
-# 
 # 18  Variables      1309  Observations
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # pclass 
 #    n  missing distinct 
 # 1309        0        3 
-# 
 # Value        1st   2nd   3rd
 # Frequency    323   277   709
 # Proportion 0.247 0.212 0.542
@@ -455,19 +424,16 @@ describe(titanic3)
 # survived : Survived 
 #    n  missing distinct     Info      Sum     Mean      Gmd 
 # 1309        0        2    0.708      500    0.382   0.4725 
-# 
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # name : Name 
 #    n  missing distinct 
 # 1309        0     1307 
-# 
 # lowest : Abbing, Mr. Anthony             Abbott, Master. Eugene Joseph   Abbott, Mr. Rossmore Edward     Abbott, Mrs. Stanton (Rosa Hunt Abelseth, Miss. Karen Marie    
 # highest: Zabour, Miss. Hileni            Zabour, Miss. Thamine           Zakarian, Mr. Mapriededer       Zakarian, Mr. Ortin             Zimmerman, Mr. Leo             
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # sex 
 #    n  missing distinct 
 # 1309        0        2 
-# 
 # Value      female   male
 # Frequency     466    843
 # Proportion  0.356  0.644
@@ -475,15 +441,12 @@ describe(titanic3)
 # age : Age [Year] 
 #    n  missing distinct     Info     Mean      Gmd      .05      .10      .25      .50      .75      .90      .95 
 # 1309        0       98    0.993    29.37    14.22      7.4     16.0     22.0     26.0     37.0     48.0     55.0 
-# 
 # lowest :  0.1667  0.3333  0.4167  0.6667  0.7500, highest: 70.5000 71.0000 74.0000 76.0000 80.0000
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # sibsp : Number of Siblings/Spouses Aboard 
 #    n  missing distinct     Info     Mean      Gmd 
 # 1309        0        7     0.67   0.4989    0.777 
-# 
 # lowest : 0 1 2 3 4, highest: 2 3 4 5 8
-# 
 # Value          0     1     2     3     4     5     8
 # Frequency    891   319    42    20    22     6     9
 # Proportion 0.681 0.244 0.032 0.015 0.017 0.005 0.007
@@ -491,9 +454,7 @@ describe(titanic3)
 # parch : Number of Parents/Children Aboard 
 #    n  missing distinct     Info     Mean      Gmd 
 # 1309        0        8    0.549    0.385   0.6375 
-# 
 # lowest : 0 1 2 3 4, highest: 3 4 5 6 9
-# 
 # Value          0     1     2     3     4     5     6     9
 # Frequency   1002   170   113     8     6     6     2     2
 # Proportion 0.765 0.130 0.086 0.006 0.005 0.005 0.002 0.002
@@ -501,25 +462,21 @@ describe(titanic3)
 # ticket : Ticket Number 
 #    n  missing distinct 
 # 1309        0      929 
-# 
 # lowest : 110152      110413      110465      110469      110489     , highest: W./C. 6608  W./C. 6609  W.E.P. 5734 W/C 14208   WE/P 5735  
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # fare : Passenger Fare [British Pound (\243)] 
 #    n  missing distinct     Info     Mean      Gmd      .05      .10      .25      .50      .75      .90      .95 
 # 1309        0      282        1    33.28    38.59    7.225    7.570    7.896   14.454   31.275   78.020  133.650 
-# 
 # lowest :   0.0000   3.1708   4.0125   5.0000   6.2375, highest: 227.5250 247.5208 262.3750 263.0000 512.3292
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # cabin 
 #    n  missing distinct 
 # 1309        0      187 
-# 
 # lowest :     A10 A11 A14 A16, highest: F33 F38 F4  G6  T  
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # embarked 
 #    n  missing distinct 
 # 1309        0        3 
-# 
 # Value        Cherbourg  Queenstown Southampton
 # Frequency          270         123         916
 # Proportion       0.206       0.094       0.700
@@ -527,40 +484,33 @@ describe(titanic3)
 # boat 
 #    n  missing distinct 
 # 1309        0       28 
-# 
 # lowest :     1   10  11  12 , highest: A   B   C   C D D  
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # body : Body Identification Number 
 #   n  missing distinct     Info     Mean      Gmd      .05      .10      .25      .50      .75      .90      .95 
 # 121     1188      121        1    160.8      113       16       35       72      155      256      297      307 
-# 
 # lowest :   1   4   7   9  14, highest: 312 314 322 327 328
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # home.dest : Home/Destination 
 #   n  missing distinct 
 # 745      564      368 
-# 
 # lowest : ?Havana, Cuba                   Aberdeen / Portland, OR         Albany, NY                      Altdorf, Switzerland            Amenia, ND                     
 # highest: Worcester, England              Worcester, MA                   Yoevil, England / Cottage Grove Youngstown, OH                  Zurich, Switzerland            
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # title 
 #    n  missing distinct 
 # 1309        0       34 
-# 
 # lowest : Billiard, Brito,    Capt.     Carlo,    Col.     , highest: Steen,    the       Velde,    Walle,    y        
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # lastname 
 #    n  missing distinct 
 # 1309        0      868 
-# 
 # lowest : Abbing,      Abbott,      Abelseth,    Abelson,     Abrahamsson,, highest: Yousseff,    Yrois,       Zabour,      Zakarian,    Zimmerman,  
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # nfamily : Number of Siblings/Spouses Aboard 
 #    n  missing distinct     Info     Mean      Gmd 
 # 1309        0        9    0.773    1.884    1.328 
-# 
 # lowest :  1  2  3  4  5, highest:  5  6  7  8 11
-# 
 # Value          1     2     3     4     5     6     7     8    11
 # Frequency    790   235   159    43    22    25    16     8    11
 # Proportion 0.604 0.180 0.121 0.033 0.017 0.019 0.012 0.006 0.008
@@ -568,8 +518,6 @@ describe(titanic3)
 # mom 
 #    n  missing distinct     Info      Sum     Mean      Gmd 
 # 1309        0        2    0.239      114  0.08709   0.1591 
-# 
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------                                                                                                                             -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 # save the file 
 save.image("titanic3.RData")

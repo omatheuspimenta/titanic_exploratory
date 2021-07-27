@@ -18,3 +18,7 @@
 ## Regressão
 * [Exibição](regression.md)
 * [code - R](regression.R)
+
+## Classificação
+* [Exibição](classification.md)
+* [code - R](classification.R)

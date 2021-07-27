@@ -22,6 +22,10 @@ load("titanic3.RData")
 tapply(titanic3$survived, titanic3$pclass, sum)
 # 1st 2nd 3rd 
 # 200 119 181 
+# comparing the % for class
+tapply(titanic3$survived, titanic3$pclass, sum) / table(titanic3$pclass)
+#       1st       2nd       3rd 
+# 0.6191950 0.4296029 0.2552891 
 # sex by class
 tapply(titanic3$sex, titanic3$pclass, table)
 #`1st`            `2nd`             `3rd`
