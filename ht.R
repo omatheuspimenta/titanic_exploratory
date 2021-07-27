@@ -3,11 +3,9 @@
 ## @ Matheus Pimenta
 ## github.com/omatheuspimenta/titanic_exploratory
 ###########################################################
-
 #####
 # Set path
 setwd("/home/matheus/Dropbox/06_doutorado/2021_01/Bioestatistica/projeto/dataset/")
-
 #####
 # Libraries
 library("ggplot2") #for graphics
@@ -168,7 +166,7 @@ wt_age31 <- wilcox.test(class3$age, class1$age)
 # alternative hypothesis: true location shift is not equal to 0
 # Thus, \mu1 \neq \mu2, p-value < 0.05 (alpha)
 # We have evidence that all positions measures for the age
-# in the populations are different based  in the wilcox.test
+# in the populations are different based on the wilcox.test
 remove(wt_age12, wt_age23, wt_age31)
 # wilcox.test -> fare
 wt_fare12 <- wilcox.test(class1$fare, class2$fare)
@@ -190,6 +188,6 @@ wt_fare31 <- wilcox.test(class3$fare, class1$fare)
 # alternative hypothesis: true location shift is not equal to 0
 # Thus, \mu1 \neq \mu2, p-value < 0.05 (alpha)
 # We have evidence that all positions measures for the fare
-# in the populations are different based  in the wilcox.test
+# in the populations are different based on the wilcox.test
 remove(wt_fare12, wt_fare23, wt_fare31)
 remove(class1, class2, class3)
