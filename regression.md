@@ -84,9 +84,9 @@ evento em face de um conjunto de variáveis explanatórias.
 
 Algumas plicações da [regressão logística](https://en.wikipedia.org/wiki/Logistic_regression):
 
-> Em medicina, permite por exemplo determinar os factores que caracterizam um grupo de indivíduos doentes em relação a indivíduos sãos;
-> No domínio dos seguros, permite encontrar fracções da clientela que sejam sensíveis a determinada política securitária em relação a um dado risco particular;
-> Em instituições financeiras, pode detectar os grupos de risco para a subscrição de um crédito;
+> Em medicina, permite por exemplo determinar os factores que caracterizam um grupo de indivíduos doentes em relação a indivíduos sãos;  
+> No domínio dos seguros, permite encontrar fracções da clientela que sejam sensíveis a determinada política securitária em relação a um dado risco particular;  
+> Em instituições financeiras, pode detectar os grupos de risco para a subscrição de um crédito;  
 > Em econometria, permite explicar uma variável discreta, como por exemplo as intenções de voto em actos eleitorais.
 
 O dataset será dividido em treinamento e teste, na proporção 80/20, isto é, 80% dos dados serão utilizados para o treinamento do modelo e 20% dos dados serão usados para o testar o modelo.
