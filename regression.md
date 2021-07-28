@@ -39,7 +39,7 @@ Utilizamos a estratégia de seleção de _features_ para o moddelo através da i
 
 Para isso foram comparadas todas as variáveis contra a nossa variável resposta _survived_ e selecionadas as que possuem o maior valor de informação mútua.
 
-**ATENÇÃO: Em ambientes de produção, fixar um valor de _threshold_, em nossa apresentação foram selecionadas 5 variáveis como demonstração.**
+**ATENÇÃO: Na prática o ideal é fixar um valor de _threshold_, em nossa apresentação foram selecionadas 5 variáveis como demonstração.**
 
 ```r
 # discretizing
