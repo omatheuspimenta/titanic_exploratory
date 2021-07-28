@@ -110,7 +110,7 @@ split <- sample.split(titanic3$survived, SplitRatio=0.8)
 train_df <- subset(titanic3, split == "TRUE")
 test_df <- subset(titanic3, split == "FALSE")
 # model to train/test
-lr <- glm(survived~factor(sex)+
+lr <- glm(factor(survived)~factor(sex)+
             fare+
             factor(mom)+
             class+
@@ -158,17 +158,17 @@ anova(lr, test = "Chisq")
 # Model: binomial, link: logit
 # Response: survived
 # Terms added sequentially (first to last)
-#              Df Deviance Resid. Df Resid. Dev  Pr(>Chi)    
-# NULL                         1046    1392.63              
+#              Df Deviance Resid. Df Resid. Dev  Pr(>Chi)
+# NULL                         1046    1392.63
 # factor(sex)  1  287.752      1045    1104.87 < 2.2e-16 ***
 # fare         1   35.544      1044    1069.33 2.494e-09 ***
-# factor(mom)  1    0.370      1043    1068.96  0.542941    
+# factor(mom)  1    0.370      1043    1068.96  0.542941
 # class        1   61.470      1042    1007.49 4.495e-15 ***
-# children     1    8.570      1041     998.92  0.003418 ** 
-# teenage      1    0.365      1040     998.56  0.545506    
-# young        1    2.066      1039     996.49  0.150568    
-# adult        1    2.967      1038     993.52  0.084978 .  
-# old          1    0.473      1037     993.05  0.491666    
+# children     1    8.570      1041     998.92  0.003418 **
+# teenage      1    0.365      1040     998.56  0.545506
+# young        1    2.066      1039     996.49  0.150568
+# adult        1    2.967      1038     993.52  0.084978 .
+# old          1    0.473      1037     993.05  0.491666
 # nfamily      1   22.733      1036     970.32 1.862e-06 ***
 #   ---
 #   Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
@@ -216,7 +216,7 @@ step(lr, direction = 'both')
 # Null Deviance:	    1393 
 # Residual Deviance: 970.9 	AIC: 990.9
 # Well let's remove "old" and use the model
-lr <- glm(survived~factor(sex)+
+lr <- glm(factor(survived)~factor(sex)+
             fare+
             factor(mom)+
             class+
@@ -265,24 +265,23 @@ confusionMatrix(test_df$pred, as.factor(test_df$survived))
 # Prediction   0   1
 #          0 128  24
 #          1  34  76
-# 
-#                Accuracy : 0.7786          
+#                Accuracy : 0.7786
 #                  95% CI : (0.7234, 0.8274)
-#     No Information Rate : 0.6183          
-#     P-Value [Acc > NIR] : 2.14e-08        
-#                   Kappa : 0.5398          
-#  Mcnemar's Test P-Value : 0.2373          
-#             Sensitivity : 0.7901          
-#             Specificity : 0.7600          
-#          Pos Pred Value : 0.8421          
-#          Neg Pred Value : 0.6909          
-#              Prevalence : 0.6183          
-#          Detection Rate : 0.4885          
-#    Detection Prevalence : 0.5802          
-#       Balanced Accuracy : 0.7751          
-#        'Positive' Class : 0     
+#     No Information Rate : 0.6183
+#     P-Value [Acc > NIR] : 2.14e-08
+#                   Kappa : 0.5398
+#  Mcnemar's Test P-Value : 0.2373
+#             Sensitivity : 0.7901
+#             Specificity : 0.7600
+#          Pos Pred Value : 0.8421
+#          Neg Pred Value : 0.6909
+#              Prevalence : 0.6183
+#          Detection Rate : 0.4885
+#    Detection Prevalence : 0.5802
+#       Balanced Accuracy : 0.7751
+#        'Positive' Class : 0
 # odds in model
-logitor(survived~factor(sex)+
+logitor(factor(survived)~factor(sex)+
           fare+
           factor(mom)+
           class+
@@ -325,6 +324,27 @@ exp(cbind(OR=coef(lr), confint(lr)))
 remove(lr, roc1, ROCRperf, ROCRpred, test_df, train_df, predictTrain, split)
 #####
 # trying to improve accuracy
+# Reload file
+load("titanic3.RData")
+#####
+# removing some columns
+titanic3$name <- NULL
+titanic3$ticket <- NULL
+titanic3$cabin <- NULL
+titanic3$boat <- NULL
+titanic3$body <- NULL
+titanic3$home.dest <- NULL
+titanic3$lastname <- NULL
+titanic3$title <- NULL
+# pclass class
+titanic3$class <- ifelse(titanic3$pclass=="1st",1,ifelse(titanic3$pclass=="2nd",2,ifelse(titanic3$pclass=="3rd",3,0)))
+# sex dummy
+titanic3$sex <- ifelse(titanic3$sex=="female",1,0)
+# Drop columns 
+titanic3$pclass <- NULL
+titanic3$embarked <- NULL
+titanic3$sibsp <- NULL
+titanic3$parch <- NULL
 # removing the fare outlier value and no dummy the "age" column
 i <- which(titanic3$fare>500)
 titanic3 <- titanic3[-i,]
@@ -336,7 +356,7 @@ split <- sample.split(titanic3$survived, SplitRatio=0.8)
 train_df <- subset(titanic3, split == "TRUE")
 test_df <- subset(titanic3, split == "FALSE")
 # model to train/test
-lr <- glm(survived~factor(sex)+
+lr <- glm(factor(survived)~factor(sex)+
             fare+
             factor(mom)+
             class+
@@ -468,21 +488,21 @@ confusionMatrix(test_df$pred, as.factor(test_df$survived))
 # Prediction   0   1
 #          0 126  23
 #          1  36  76
-#                Accuracy : 0.7739          
-#                  95% CI : (0.7183, 0.8232)
-#     No Information Rate : 0.6207          
-#     P-Value [Acc > NIR] : 8.849e-08       
-#                   Kappa : 0.5319          
-#  Mcnemar's Test P-Value : 0.1182          
-#             Sensitivity : 0.7778          
-#             Specificity : 0.7677          
-#          Pos Pred Value : 0.8456          
-#          Neg Pred Value : 0.6786          
-#              Prevalence : 0.6207          
-#          Detection Rate : 0.4828          
-#    Detection Prevalence : 0.5709          
-#       Balanced Accuracy : 0.7727          
-#        'Positive' Class : 0  
+ #               Accuracy : 0.7739
+ #                 95% CI : (0.7183, 0.8232)
+ #    No Information Rate : 0.6207
+ #    P-Value [Acc > NIR] : 8.849e-08
+ #                  Kappa : 0.5319
+ # Mcnemar's Test P-Value : 0.1182
+ #            Sensitivity : 0.7778
+ #            Specificity : 0.7677
+ #         Pos Pred Value : 0.8456
+ #         Neg Pred Value : 0.6786
+ #             Prevalence : 0.6207
+ #         Detection Rate : 0.4828
+ #   Detection Prevalence : 0.5709
+ #      Balanced Accuracy : 0.7727
+ #       'Positive' Class : 0
 logitor(survived~factor(sex)+
           class+
           age+
@@ -677,21 +697,21 @@ confusionMatrix(test_df$pred, as.factor(test_df$survived))
 # Prediction   0   1
 #          0 120  19
 #          1  42  80
-#                Accuracy : 0.7663          
-#                  95% CI : (0.7102, 0.8163)
-#     No Information Rate : 0.6207          
-#     P-Value [Acc > NIR] : 3.81e-07        
-#                   Kappa : 0.5251          
-#  Mcnemar's Test P-Value : 0.00485         
-#             Sensitivity : 0.7407          
-#             Specificity : 0.8081          
-#          Pos Pred Value : 0.8633          
-#          Neg Pred Value : 0.6557          
-#              Prevalence : 0.6207          
-#          Detection Rate : 0.4598          
-#    Detection Prevalence : 0.5326          
-#       Balanced Accuracy : 0.7744          
-#        'Positive' Class : 0 
+ #               Accuracy : 0.7663
+ #                 95% CI : (0.7102, 0.8163)
+ #    No Information Rate : 0.6207
+ #    P-Value [Acc > NIR] : 3.81e-07
+ #                  Kappa : 0.5251
+ # Mcnemar's Test P-Value : 0.00485
+ #            Sensitivity : 0.7407
+ #            Specificity : 0.8081
+ #         Pos Pred Value : 0.8633
+ #         Neg Pred Value : 0.6557
+ #             Prevalence : 0.6207
+ #         Detection Rate : 0.4598
+ #   Detection Prevalence : 0.5326
+ #      Balanced Accuracy : 0.7744
+ #       'Positive' Class : 0
 logitor(survived~factor(sex)+
           factor(mom)+
           class+

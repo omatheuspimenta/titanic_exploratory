@@ -34,7 +34,7 @@ titanic3$title <- NULL
 # is to use Information Theory
 #####
 # discretizing
-disc_df <- discretize(titanic3)
+# disc_df <- discretize(titanic3)
 # mutual information among the columns
 # mi <- mutinformation(disc_df)
 # t<-mi[-2,2]
@@ -104,6 +104,7 @@ titanic3$embarked <- NULL
 titanic3$sibsp <- NULL
 titanic3$parch <- NULL
 titanic3$age <- NULL
+titanic3$nfamily <- NULL
 #####
 # Normalize "fare"
 titanic3$fare <- rescale(as.numeric(titanic3$fare))
@@ -120,33 +121,33 @@ test_df <- subset(titanic3, split == "FALSE")
 # KNN - k = 3
 # with you need improve the method, change the 'k'
 # suggest: use a grid search to do this
-knn3 = knn(train = train_df[,-1],
+knn3 <- knn(train = train_df[,-1],
             test = test_df[,-1],
             cl = train_df[,1],
             k = 3)
-cm_knn3 = table(test_df[,1], knn3)
+cm_knn3 <- table(test_df[,1], knn3)
 # confusion matrix
 confusionMatrix(cm_knn3)
 # Confusion Matrix and Statistics
 # knn3
 #     0   1
-# 0 133  29
-# 1  36  64
-#                Accuracy : 0.7519        
-#                  95% CI : (0.695, 0.803)
-#     No Information Rate : 0.645         
-#     P-Value [Acc > NIR] : 0.0001347     
-#                   Kappa : 0.4672        
-#  Mcnemar's Test P-Value : 0.4567504     
-#             Sensitivity : 0.7870        
-#             Specificity : 0.6882        
-#          Pos Pred Value : 0.8210        
-#          Neg Pred Value : 0.6400        
-#              Prevalence : 0.6450        
-#          Detection Rate : 0.5076        
-#    Detection Prevalence : 0.6183        
-#       Balanced Accuracy : 0.7376        
-#        'Positive' Class : 0 
+# 0 135  27
+# 1  32  68
+#                Accuracy : 0.7748
+#                  95% CI : (0.7194, 0.8239)
+#     No Information Rate : 0.6374
+#     P-Value [Acc > NIR] : 1.161e-06
+#                   Kappa : 0.5183
+#  Mcnemar's Test P-Value : 0.6025
+#             Sensitivity : 0.8084
+#             Specificity : 0.7158
+#          Pos Pred Value : 0.8333
+#          Neg Pred Value : 0.6800
+#              Prevalence : 0.6374
+#          Detection Rate : 0.5153
+#    Detection Prevalence : 0.6183
+#       Balanced Accuracy : 0.7621
+#        'Positive' Class : 0
 # if you need to do some cross-validation, please use the caret library
 # train_control = trainControl(method = 'repeatedcv',
 #                              number = 10,
@@ -159,35 +160,35 @@ confusionMatrix(cm_knn3)
 # RandomForest
 # with you need to improve the method, change the 'ntree'
 # suggest: use a grid search to do this
-rf100 = randomForest(x = train_df[-1],
+rf100 <- randomForest(x = train_df[-1],
                      y = train_df$survived,
                      ntree = 100)
-rf100_pred = predict(rf100, 
+rf100_pred <- predict(rf100, 
                      newdata = test_df[-1])
-rf100_cm = table(test_df[,1],
+rf100_cm <- table(test_df[,1],
                  rf100_pred)
 # confusion matrix
 confusionMatrix(rf100_cm)
 # Confusion Matrix and Statistics
 # rf100_pred
 #     0   1
-# 0 138  24
-# 1  34  66
-#                Accuracy : 0.7786          
-#                  95% CI : (0.7234, 0.8274)
-#     No Information Rate : 0.6565          
-#     P-Value [Acc > NIR] : 1.121e-05       
-#                   Kappa : 0.5218          
-#  Mcnemar's Test P-Value : 0.2373          
-#             Sensitivity : 0.8023          
-#             Specificity : 0.7333          
-#          Pos Pred Value : 0.8519          
-#          Neg Pred Value : 0.6600          
-#              Prevalence : 0.6565          
-#          Detection Rate : 0.5267          
-#    Detection Prevalence : 0.6183          
-#       Balanced Accuracy : 0.7678          
-#        'Positive' Class : 0 
+# 0 145  17
+# 1  33  67
+ #               Accuracy : 0.8092
+ #                 95% CI : (0.7563, 0.8549)
+ #    No Information Rate : 0.6794
+ #    P-Value [Acc > NIR] : 1.809e-06
+ #                  Kappa : 0.5829
+ # Mcnemar's Test P-Value : 0.03389
+ #            Sensitivity : 0.8146
+ #            Specificity : 0.7976
+ #         Pos Pred Value : 0.8951
+ #         Neg Pred Value : 0.6700
+ #             Prevalence : 0.6794
+ #         Detection Rate : 0.5534
+ #   Detection Prevalence : 0.6183
+ #      Balanced Accuracy : 0.8061
+ #       'Positive' Class : 0
 # if you need to do some cross-validation, please use the caret library
 # train_control = trainControl(method = 'repeatedcv',
 #                              number = 10,
@@ -198,70 +199,70 @@ confusionMatrix(rf100_cm)
 #               method = 'rf')
 #####
 # Decision Tree
-dt = rpart(formula = survived ~ .,
+dt <- rpart(formula = survived ~ .,
            data = titanic3)
 rpart.plot(dt)
-dt_pred = predict(dt, 
+dt_pred <- predict(dt, 
                   newdata = test_df[-1],
                   type = "class")
-dt_cm = table(test_df[,1],
+dt_cm <- table(test_df[,1],
               dt_pred)
 confusionMatrix(dt_cm)
 # Confusion Matrix and Statistics
 # dt_pred
 #     0   1
-# 0 138  24
-# 1  29  71
-#                Accuracy : 0.7977          
-#                  95% CI : (0.7439, 0.8446)
-#     No Information Rate : 0.6374          
-#     P-Value [Acc > NIR] : 1.275e-08       
-#                   Kappa : 0.5673          
-#  Mcnemar's Test P-Value : 0.5827          
-#             Sensitivity : 0.8263          
-#             Specificity : 0.7474          
-#          Pos Pred Value : 0.8519          
-#          Neg Pred Value : 0.7100          
-#              Prevalence : 0.6374          
-#          Detection Rate : 0.5267          
-#    Detection Prevalence : 0.6183          
-#       Balanced Accuracy : 0.7869          
-#        'Positive' Class : 0
+# 0 146  16
+# 1  26  74
+ #               Accuracy : 0.8397
+ #                 95% CI : (0.7896, 0.882)
+ #    No Information Rate : 0.6565
+ #    P-Value [Acc > NIR] : 2.532e-11
+ #                  Kappa : 0.6537
+ # Mcnemar's Test P-Value : 0.1649
+ #            Sensitivity : 0.8488
+ #            Specificity : 0.8222
+ #         Pos Pred Value : 0.9012
+ #         Neg Pred Value : 0.7400
+ #             Prevalence : 0.6565
+ #         Detection Rate : 0.5573
+ #   Detection Prevalence : 0.6183
+ #      Balanced Accuracy : 0.8355
+ #       'Positive' Class : 0
 #####
 # SVM
 # with you need to improve the method, change the hyper parameters
 # suggest: use a grid search to do this
-svm.model = svm(formula = survived ~ .,
+svm.model <- svm(formula = survived ~ .,
                 data = train_df,
                 type = 'C-classification',
                 kernel = 'radial',
                 cost = 10.0)
-svm.pred = predict(svm.model,
+svm.pred <- predict(svm.model,
                    newdata = test_df[-1])
-svm_cm = table(test_df[,1],
+svm_cm <- table(test_df[,1],
                svm.pred)
 # confusion matrix
 confusionMatrix(svm_cm)
 # Confusion Matrix and Statistics
 # svm.pred
 #     0   1
-# 0 141  21
-# 1  34  66
-#                Accuracy : 0.7901          
-#                  95% CI : (0.7357, 0.8378)
-#     No Information Rate : 0.6679          
-#     P-Value [Acc > NIR] : 9.038e-06       
-#                   Kappa : 0.5439          
-#  Mcnemar's Test P-Value : 0.1056          
-#             Sensitivity : 0.8057          
-#             Specificity : 0.7586          
-#          Pos Pred Value : 0.8704          
-#          Neg Pred Value : 0.6600          
-#              Prevalence : 0.6679          
-#          Detection Rate : 0.5382          
-#    Detection Prevalence : 0.6183          
-#       Balanced Accuracy : 0.7822          
-#        'Positive' Class : 0  
+# 0 142  20
+# 1  32  68
+ #               Accuracy : 0.8015
+ #                 95% CI : (0.748, 0.8481)
+ #    No Information Rate : 0.6641
+ #    P-Value [Acc > NIR] : 6.34e-07
+ #                  Kappa : 0.5696
+ # Mcnemar's Test P-Value : 0.1272
+ #            Sensitivity : 0.8161
+ #            Specificity : 0.7727
+ #         Pos Pred Value : 0.8765
+ #         Neg Pred Value : 0.6800
+ #             Prevalence : 0.6641
+ #         Detection Rate : 0.5420
+ #   Detection Prevalence : 0.6183
+ #      Balanced Accuracy : 0.7944
+ #       'Positive' Class : 0
 #####
 # remove temp variables
 remove(cm_knn3, knn3, dt_cm, dt_pred, knn_3, rf100_cm, rf100_pred, split, svm_cm,

@@ -5,7 +5,7 @@
 ### Dataset: [titanic3.RData](dataset/titanic3.RData)
 ###### [detalhes sobre a geração dos dados](preprocess.md)
 ---
-## Libraries
+## Load libraries
 ```r
 library("ggplot2")  #for graphics
 library("dplyr")    #for summary 

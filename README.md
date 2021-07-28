@@ -1,4 +1,5 @@
 # [Análise Exploratória](github.com/omatheuspimenta/titanic_exploratory)
+![Titanic](figures/titanic.jpg)
 ## Bioestatística - 2021
 [Matheus Pimenta](https://github.com/omatheuspimenta)
 
