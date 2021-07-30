@@ -25,7 +25,7 @@ tapply(titanic3$survived, titanic3$pclass, sum)
 |--|----|----|
 |200| 119| 181|
 
-* Em número absolutos pode parecer que os passageiros da primeira e terceira classe estão próximo, contudo quando comparamos a % dos passageiros que sobreviveram por classe temos que a maioria dos passageiros lotados na primeira classe sobreviveram:
+* Em números absolutos pode parecer que os passageiros da primeira e terceira classe estão próximos, contudo quando comparamos a % dos passageiros que sobreviveram por classe, temos que a maioria dos passageiros lotados na primeira classe sobreviveram:
 ```r
 tapply(titanic3$survived, titanic3$pclass, sum) / table(titanic3$pclass)
 ```
@@ -33,7 +33,7 @@ tapply(titanic3$survived, titanic3$pclass, sum) / table(titanic3$pclass)
 |---|---------|-----------| 
 |0.619| 0.429| 0.255|
 
-* Comparando o número de passageiros do sexo masculino e feminino por classe é possível verificar que há uma maior presença de indivíduos do sexo masculino em todas as classes, quando levamos em consideração a idade média em cada uma das classes, a primeira classe possuí a maior idade média, seguida pela segunda classe e por último aparece a terceira classe.
+* Comparando o número de passageiros do sexo masculino e feminino por classe é possível verificar que há uma maior presença de indivíduos do sexo masculino em todas as classes, quando levamos em consideração a idade média em cada uma delas, a primeira classe possui a maior idade média, seguida pela segunda classe e por último aparece a terceira.
 ```r
 tapply(titanic3$sex, titanic3$pclass, table)
 ```
@@ -65,7 +65,7 @@ tapply(titanic3$mom, titanic3$pclass, sum)
 |1st| 2nd| 3rd|
 |---|----|----| 
 |40|  28|  46|
-* Analisando mães sobreviventes por cada uma das classes, na primeira e segunda classe apenas uma mãe não conseguiu salvar-se, vamos verificar quem são essas pessoas:
+* Analisando mães sobreviventes por cada uma das classes, na primeira e segunda, apenas uma mãe não conseguiu salvar-se, vamos verificar quem são essas pessoas:
 ```r
 titanic3[titanic3$pclass=="1st" & titanic3$survived==0 & titanic3$mom==1 ,]
 titanic3[titanic3$pclass=="2nd" & titanic3$survived==0 & titanic3$mom==1 ,]
@@ -98,8 +98,8 @@ ggheatmap +
   geom_text(aes(Var2, Var1, label = value), color = "black", size = 4)
 ```
 [Figure - heatmap_correlation.pdf](figures/heatmap_correlation.pdf)  
-Utilizamos a correlação de Pearson no momento, podemos apresentar outras medidas de correlação se necessário.
-A matriz de correlação apresenta resultados plausíveis com o esperado, temos uma correlação negativa entre _class_ e _fare_, o que é esperado, pois quanto "menor" a identificação da classe "maior" o valor da passagem. Também é possível observar essa relação entre _age_ e _class_. As análises seguintes em relação a matriz de correlação podem serem tomadas de maneira análoga a essa.
+No momento utilizamos a correlação de Pearson, mas podemos apresentar outras medidas de correlação se necessário.
+A matriz de correlação apresenta resultados plausíveis com o esperado, temos uma correlação negativa entre _class_ e _fare_, o que é esperado, pois quanto "menor" a identificação da classe "maior" o valor da passagem. Também é possível observar essa relação entre _age_ e _class_. As análises seguintes em relação a matriz de correlação podem ser tomadas de maneira análoga a essa.
 
 _Se necessário pode-se utilizar teste de hipótese para verificar a correlação entre as variáveis._
 
@@ -108,7 +108,7 @@ cor.test(df_cor$class,df_cor$fare, method = "pearson")
 ```
 
 ## Scatter Plot
-Para verificar a distribuição entre as observações das variáveis um _scatter plot_ foi realizado relacionando _fare_ e _age_, separados por _class_. Através dessa representação é possível verificar que o valor médio entre segunda e terceira classe são bem próximos, por observação. Já os valores para a primeira classe são em sua maioria "distantes" dos valores da segunda e terceira classe. Essa observação é interessante já que através dela é possível verificar que mesmo na primeira classe alguns passageiros pagaram valores inferiores a passageiros de classes inferiores.  
+Para verificar a distribuição entre as observações das variáveis, um _scatter plot_ foi realizado relacionando _fare_ e _age_ separados por _class_. Através dessa representação é possível verificar que o valor médio entre segunda e terceira classe são bem próximos, por observação. Já os valores para a primeira classe são em sua maioria "distantes" dos valores da segunda e terceira. Essa observação é interessante já que através dela é possível verificar que mesmo na primeira classe alguns passageiros pagaram valores inferiores a passageiros de classes inferiores.  
 [Figure - scatterplot_agefare.pdf](figures/scatterplot_agefare.pdf)  
 
 ## Teste de Hipótese
@@ -131,4 +131,4 @@ wt_fare12 <- wilcox.test(class1$fare, class2$fare)
 wt_fare23 <- wilcox.test(class2$fare, class3$fare)
 wt_fare31 <- wilcox.test(class3$fare, class1$fare)
 ```
-Em todos os testes de hipótese realizados os valores retornados indicaram que as medidas _age_ e _fare_ são diferentes para todas as classes. Isso é, há uma diferença entre as médias das variáveis _age_ e _fare_ entre as classes.
+Em todos os testes de hipótese realizados, os valores retornados indicaram que as medidas _age_ e _fare_ são diferentes para todas as classes. Isso é, há uma diferença entre as médias das variáveis _age_ e _fare_ entre as classes.

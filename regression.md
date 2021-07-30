@@ -35,7 +35,7 @@ titanic3$title <- NULL
 
 ## Feature Selection - Teoria da Informação
 
-Utilizamos a estratégia de seleção de _features_ para o moddelo através da informação mútua entre as colunas, isto é, o quanto de informação é "compartilhada" entre as variáveis. Essa etapa é necessária para remover variáveis que não fornecem informação ao modelo, sendo uma etapa de redução de dimensionalidade ao modelo proposto.
+Utilizamos a estratégia de seleção de _features_ para o modelo através da informação mútua entre as colunas, isto é, o quanto de informação é "compartilhada" entre as variáveis. Essa etapa é necessária para remover variáveis que não fornecem informação ao modelo, sendo uma etapa de redução de dimensionalidade ao modelo proposto.
 
 Para isso foram comparadas todas as variáveis contra a nossa variável resposta _survived_ e selecionadas as que possuem o maior valor de informação mútua.
 
@@ -89,7 +89,7 @@ Algumas plicações da [regressão logística](https://en.wikipedia.org/wiki/Log
 > Em instituições financeiras, pode detectar os grupos de risco para a subscrição de um crédito;  
 > Em econometria, permite explicar uma variável discreta, como por exemplo as intenções de voto em actos eleitorais.
 
-O dataset será dividido em treinamento e teste, na proporção 80/20, isto é, 80% dos dados serão utilizados para o treinamento do modelo e 20% dos dados serão usados para o testar o modelo.
+O dataset será dividido em treinamento e teste, na proporção 80/20, isto é, 80% dos dados serão utilizados para o treinamento do modelo e 20% dos dados serão usados para testar o modelo.
 
 ```r
 set.seed(7)
@@ -123,13 +123,13 @@ anova(lr, test = "Chisq")
 ```
 O resultado do teste _ANOVA_ mostra que a variável _adult_ acrescenta baixa informação ao modelo, podemos tratá-la, isto é, considerar uma outra forma de divisão da coluna que a gerou (_age_). Contudo, antes, faremos um outro teste para a análise de nosso modelo.
 
-O teste _stepwise_ realiza diversa iterações incluíndo e removendo as variáveis ao modelo, de maneira que um novo modelo seja fornecido com um menor valor de AIC. 
+O teste _stepwise_ realiza diversas iterações incluindo e removendo as variáveis ao modelo, de maneira que um novo modelo seja fornecido com um menor valor de AIC. 
 
 ```r
 step(lr, direction = 'both')
 ```
 
-Analisando o resultado do _stepwise_ em nosso modelo de regressão logística quando a variável _old_ é removida há um ganho ao modelo, dessa forma consideraremos essa modificação ao modelo de regressão logística.
+Analisando o resultado do _stepwise_ em nosso modelo de regressão logística, quando a variável _old_ é removida há um ganho ao modelo, dessa forma consideraremos essa modificação ao modelo de regressão logística.
 
 ```r
 lr <- glm(factor(survived)~factor(sex)+
@@ -175,7 +175,7 @@ plot(roc1,
      main = "ROC Curve")
 ```
 
-Utilizndo o valor máximo obtido pelos _thresholds_ na curva ROC, utilizamos o valor de 0.375 para a geração da matriz de confusão e dessa forma avaliarmos as demais métricas do modelo de regressão logística proposto.
+Utilizando o valor máximo obtido pelos _thresholds_ na curva ROC, usamos o valor de 0.375 para a geração da matriz de confusão e dessa forma avaliamos as demais métricas do modelo de regressão logística proposta.
 
 ```r
 # Confusion Matrix with threshold 0.375
@@ -215,7 +215,7 @@ Os seguintes valores foram obtidos para a matriz de confusão e métricas:
 |       Balanced Accuracy  	|  0.7751           	|
 |        'Positive' Class  	| 0                 	|
 
-Além das métricas acima, o modelo de regressão logística também fornece os valores da [razão de chances](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2938757/) (_odds ratio_), que significa quais as chances do evento ocorrer para aquela variável.
+Além das métricas acima, o modelo de regressão logística também fornece os valores da [razão de chances](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2938757/) (_odds ratio_), que significa quais as chances de o evento ocorrer para aquela variável.
 
 ```r
 logitor(factor(survived)~factor(sex)+
@@ -243,9 +243,9 @@ exp(cbind(OR=coef(lr), confint(lr)))
 | adult        	|  1.6971654 	| 0.9209081 	|  3.2016328 	|
 | nfamily      	|  0.6928725 	| 0.5805972 	|  0.8137376 	|
 
-Analisando os valores de _odds ratio (OR)_ pode-se verificar que mulheres (_sex_ = 1) e crianças (_children_) possuem a maior chance de sobreviver. Essa análise converge com a história do Titanic, onde as primeiras pessoas a serem colocadas nos botes salva-vidas eram mulheres e crianças.
+Analisando os valores de _odds ratio (OR)_ pode-se verificar que mulheres (_sex_ = 1) e crianças (_children_) possuem a maior chance de sobreviver. Essa análise converge com a história do Titanic, na qual as primeiras pessoas a serem colocadas nos botes salva-vidas eram mulheres e crianças.
 
-Nós podemos refazer as análises considerando, por exemplo, _class_ como um fator e dessa maneira analisar as chances de sobrevivência para da uma das classes.
+Nós podemos refazer as análises considerando, por exemplo, _class_ como um fator e dessa maneira analisar as chances de sobrevivência para cada uma das classes.
 
 ## Tentando melhorar o modelo
 
@@ -317,7 +317,7 @@ A matriz de confusão e métricas são apresentadas abaixo:
 | Balanced Accuracy      	| 0.7727           	|
 | 'Positive' Class       	| 0                	|
 
-As análises em relação à _odds ratio_ são análogas às já executadas.
+As análises em relação a _odds ratio_ são análogas às já executadas.
 
 |              	|     OR     	|    2.5%   	|    97.5%   	|
 |--------------	|:----------:	|:---------:	|:----------:	|
@@ -407,8 +407,8 @@ E por fim, a análise dos valores de _odds ratio_ obtidos para este modelo é a 
 | old          	|  0.5410132 	| 0.2892423 	|  0.9913836 	|
 | nfamily      	|  0.6796310 	| 0.5718627 	|  0.7959590 	|
 
-Novamente, mulheres e crianças possuem uma chance maior de sobrevida quando comparados com os outros grupos.
+Novamente, mulheres e crianças possuem uma chance maior de sobrevida quando comparadas com os outros grupos.
 
 ---
 
-**ADVERTÊNCIA:** Esse é uma apresentação do método aplicado em um dataset modelo. As abordagens são exemplos de aplicação. Há diversas outras formas de considerar as análises, como resíduos, normalidade, conhecimento e tratamento a priori dos dados, entre outras.
+**ADVERTÊNCIA:** Essa é uma apresentação do método aplicado em um dataset modelo. As abordagens são exemplos de aplicação. Há diversas outras formas de considerar as análises, como resíduos, normalidade, conhecimento e tratamento a priori dos dados, entre outras.

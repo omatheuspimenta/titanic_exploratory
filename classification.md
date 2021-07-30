@@ -96,7 +96,7 @@ O dataset final contem 39 variáveis e 1309 observações. A única coluna com d
 
 O dataset foi dividido em subconjunto de treinamento e teste, na proporção 80/20, isto é, 80% dos dados foram utilizados para treinamento e 20% dos dados foram utilizados para teste dos classificadores.
 
-**ADVERTÊNCIA:** Não foi realizado nenhum tipo de ajuste fino nos hiper parâmetros dos classificadores, como também não foi realizado validação cruzada. A apresentação das métricas obtidas é um referêncial. Análises dos hiper parâmetros e validação cruzada são necessárias para a confirmação dos resultados.
+**ADVERTÊNCIA:** Não foi realizado nenhum tipo de ajuste fino nos hiper parâmetros dos classificadores, como também não foi realizado validação cruzada. A apresentação das métricas obtidas é um referencial. Análises dos hiper parâmetros e validação cruzada são necessárias para a confirmação dos resultados.
 
 ## KNN
 
@@ -135,7 +135,7 @@ A matriz de confusão e métricas utilizando o KNN são apresentadas abaixo:
 
 ## Random Forest
 
-O algoritmo Random Forest é um método _ensemble_ que combina a execução de diversas árvores de decisão de maneira que relacione os atributos (características) dos elementos (observações) com seus respectivos rótulos (classes) com uma maior assertividade, diminuindo o efeito de _overfitting_ do método árvore de decisão.
+O algoritmo Random Forest é um método _ensemble_ que combina a execução de diversas árvores de decisão de maneira que relaciona os atributos (características) dos elementos (observações) com seus respectivos rótulos (classes) com uma maior assertividade, diminuindo o efeito de _overfitting_ do método árvore de decisão.
 
 ```r
 rf100 <- randomForest(x = train_df[-1],
@@ -172,9 +172,9 @@ A matriz de confusão e métricas utilizando o KNN são apresentadas abaixo:
 
 O classificador [árvore de decisão](https://link.springer.com/article/10.1007/BF00116251) busca relacionar os atributos (características) dos elementos (observações) com seus respectivos rótulos (classes) utilizando uma estrutura de grafos em topologia de árvore. O objetivo é identificar quais as melhores características para realizar a "divisão" dos dados nas classes corretas.
 
-Para isso são considerados algumas métricas que buscam mensurar quão nítida pode ser essa divisão, como por exemplo a métrica de Gini ou ainda o quanto de informação é recebido com as divisões, através do cálculo de entropia.
+Para isso, são consideradas algumas métricas que buscam mensurar o quão nítida pode ser essa divisão, como por exemplo a métrica de Gini ou ainda o quanto de informação é recebida com as divisões, através do cálculo de entropia.
 
-É um método "simples", não exigindo conhecimentos prévios a respeito dos dados, contudo altamente propenso a _overfitting_ dos dados de treinamento. Alternativas a este comportamento são propostas nos classificadores seguintes.
+É um método "simples", não exigindo conhecimentos prévios a respeito dos dados, no entanto altamente propenso a _overfitting_ dos dados de treinamento. Alternativas a este comportamento são propostas nos classificadores seguintes.
 
 ```r
 dt <- rpart(formula = survived ~ .,
